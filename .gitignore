@@ -1,0 +1,3 @@
+# .gitignore
+backend/config/config.env
+backend/config/database.js
