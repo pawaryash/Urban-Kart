@@ -7,3 +7,4 @@ Instead, you can share the source code while allowing other developers to create
 Key learnings from this project
 MVC Architecture
 Developed Error Handling Middleware
+Now learning pagination
