@@ -1,0 +1,9 @@
+dotenv - dotenv is a zero-dependency module in Node.js that loads environment variables from a .env file into process.env. 
+This allows you to separate secrets from your source code. 
+This is useful in a collaborative environment where you may not want to share your database login credentials with other people.
+Instead, you can share the source code while allowing other developers to create their own .env file.
+
+
+Key learnings from this project
+MVC Architecture
+Developed Error Handling Middleware
