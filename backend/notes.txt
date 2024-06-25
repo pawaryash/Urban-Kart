@@ -8,3 +8,6 @@ Key learnings from this project
 MVC Architecture
 Developed Error Handling Middleware
 Now learning pagination
+
+Points to remember
+- Javascript passes objects reference and not the object itself.

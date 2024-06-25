@@ -18,7 +18,7 @@ exports.createProduct = catchAsyncError(async(req, res, next) => {
 //the export function is used to export a function to make it available to other modules
 exports.getAllProducts = catchAsyncError(async (req, res) => {
     
-    const apiFeature = new ApiFeatures(Product.find(), req.query).search();
+    const apiFeature = new ApiFeatures(Product.find(), req.query).search().filter();
     
     const products = await apiFeature.query;
     res.status(200).json({
@@ -36,8 +36,6 @@ exports.updateProduct = catchAsyncError(async(req, res, next) => {
         if(!product){
             return next(new ErrorHandler("Product not found", 404));
         }
-    
-
     
     product = await Product.findByIdAndUpdate(req.params.id, req.body,{
         new: true, 
