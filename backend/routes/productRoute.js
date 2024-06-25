@@ -11,7 +11,7 @@ router.route("/product/new").post(createProduct);
 router.route("/product/:id").put(updateProduct);
 
 //delete a product
-router.route("/product/delete/:id").delete(deleteProduct);
+router.route("/product/:id").delete(deleteProduct);
 
 //get a single product
 router.route("/product/:id").get(getProductDetails);

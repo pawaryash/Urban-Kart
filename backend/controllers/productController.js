@@ -1,6 +1,7 @@
 const Product = require("../models/productModel");
 const ErrorHandler = require("../utils/errorHandler");
 const catchAsyncError = require("../middlewares/catchAsyncError");
+const ApiFeatures = require("../utils/apifeatures");
 
 
 //Create Product -- Admin Only
@@ -14,9 +15,12 @@ exports.createProduct = catchAsyncError(async(req, res, next) => {
 
 });
 
-//the export function is used to export a function tio make it available to other modules
+//the export function is used to export a function to make it available to other modules
 exports.getAllProducts = catchAsyncError(async (req, res) => {
-    const products = await Product.find();
+    
+    const apiFeature = new ApiFeatures(Product.find(), req.query).search();
+    
+    const products = await apiFeature.query;
     res.status(200).json({
         success: true,
         products
@@ -26,7 +30,6 @@ exports.getAllProducts = catchAsyncError(async (req, res) => {
 //update a product -- Admin
 exports.updateProduct = catchAsyncError(async(req, res, next) => {
 
-    
         //Query the Product model by using id param
         let product = await Product.findById(req.params.id);
 
