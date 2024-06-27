@@ -27,7 +27,23 @@ class ApiFeatures{
         removeFields.forEach(field => {
             delete queryCopy[field];
         });
-        this.query = this.query.find(queryCopy);
+        console.log(queryCopy);
+
+        //Filter based on price range and rating
+        let queryStr = JSON.stringify(queryCopy);
+        queryStr = queryStr.replace(/\b(gt|gte|lt|lte)\b/g, (key)=>`$${key}`);
+
+        this.query = this.query.find(JSON.parse(queryStr));
+        return this;
+    }
+
+    pagination(resultsPerPage){
+        const currentPage = Number(this.queryStr.page) || 1;
+        
+        //no. of products to skip per page
+        const skipProducts = resultsPerPage * (currentPage - 1);
+
+        this.query = this.query.limit(resultsPerPage).skip(skipProducts);
         return this;
     }
 }

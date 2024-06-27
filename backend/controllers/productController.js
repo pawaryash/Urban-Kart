@@ -15,15 +15,19 @@ exports.createProduct = catchAsyncError(async(req, res, next) => {
 
 });
 
-//the export function is used to export a function to make it available to other modules
+//Get All Products
 exports.getAllProducts = catchAsyncError(async (req, res) => {
-    
-    const apiFeature = new ApiFeatures(Product.find(), req.query).search().filter();
+
+    const resultsPerPage = 5;
+    const productCount = await Product.countDocuments();
+
+    const apiFeature = new ApiFeatures(Product.find(), req.query).search().filter().pagination(resultsPerPage);
     
     const products = await apiFeature.query;
     res.status(200).json({
         success: true,
-        products
+        products,
+        productCount
     });
 });
 
