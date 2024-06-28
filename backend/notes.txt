@@ -11,3 +11,7 @@ Now learning pagination
 
 Points to remember
 - Javascript passes objects reference and not the object itself.
+
+
+Packages used
+1. For user authentication - bcrypt, jsonwebtoken, validator, nodemailer, cookie-parser, body-parser
