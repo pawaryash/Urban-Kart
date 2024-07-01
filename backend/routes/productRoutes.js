@@ -9,10 +9,10 @@ router.route("/products").get(getAllProducts);
 router.route("/product/new").post(isAuthenticatedUser,authorizedRoles("admin"), createProduct);
 
 //update a product
-router.route("/product/:id").put(updateProduct);
+router.route("/product/:id").put(isAuthenticatedUser,authorizedRoles("admin"),updateProduct);
 
 //delete a product
-router.route("/product/:id").delete(deleteProduct);
+router.route("/product/:id").delete(isAuthenticatedUser,authorizedRoles("admin"),deleteProduct);
 
 //get a single product
 router.route("/product/:id").get(getProductDetails);
