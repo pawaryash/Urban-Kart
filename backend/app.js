@@ -1,10 +1,13 @@
 const express = require("express");
 const app = express();
+const cookieParser = require("cookie-parser");
 
-const errorMiddleware = require("./middlewares/error")
+const errorMiddleware = require("./middlewares/error");
 
 //this is the same as body-parser
 app.use(express.json());
+
+app.use(cookieParser());
 
 //Route Imports
 const product = require("./routes/productRoutes");
