@@ -17,4 +17,4 @@ Packages used
 1. For user authentication - bcrypt, jsonwebtoken, validator, nodemailer, cookie-parser, body-parser,
     crypto for creating hash
 
-2. nodemailer for send emails 
+2. nodemailer for sending emails 

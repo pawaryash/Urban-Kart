@@ -6,6 +6,7 @@ const errorMiddleware = require("./middlewares/error");
 
 //this is the same as body-parser
 app.use(express.json());
+express.urlencoded({ extended: true })
 
 app.use(cookieParser());
 
