@@ -22,7 +22,20 @@ module.exports = (err, req, res, next) => {
     if(err.code === 11000){
         const message = `User with this ${Object.keys(err.keyValue)} already exists!`
         err = new ErrorHandler(message, 400);
-    }   
+    }
+    
+    //Wrong JWT Error
+    if(err.code ===  "JsonWebTokenError"){
+        const message = `JSON Web Token is invalid, try again`;
+        err = new ErrorHandler(message, 400);
+    }
+
+    //JWT Token Expired Error
+    if(err.name === "TokenExpiredError"){
+        const message = `JSON Web Token expired, try again`;
+        err = new ErrorHandler(message, 400);
+    }
+
 
     res.status(err.statusCode).json({
         success: false,
