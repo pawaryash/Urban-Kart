@@ -1,5 +1,5 @@
 const express = require("express");
-const { registerUser, loginUser, logoutUser, forgotPassword, resetPassword, getUserDetails, updateUserPassword, updateUserProfile, getAllUsers, getSingleUser } = require("../controllers/userController");
+const { registerUser, loginUser, logoutUser, forgotPassword, resetPassword, getUserDetails, updateUserPassword, updateUserProfile, getAllUsers, getSingleUser, updateUserRole, deleteUser } = require("../controllers/userController");
 const { authorizedRoles,isAuthenticatedUser } = require("../middlewares/auth");
 const router =  express.Router();
 
@@ -24,5 +24,11 @@ router.route("/admin/users").get(isAuthenticatedUser, authorizedRoles("admin"), 
 
 //Get a single user detail on Admin Dashboard
 router.route("/admin/users/:id").get(isAuthenticatedUser, authorizedRoles("admin"), getSingleUser);
+
+//Update User Role -- ADMIN
+router.route("/admin/users/:id").put(isAuthenticatedUser, authorizedRoles("admin"),updateUserRole);
+
+//Delete User --ADMIN
+router.route("/admin/users/:id").delete(isAuthenticatedUser, authorizedRoles("admin"), deleteUser);
 
 module.exports = router;
