@@ -80,8 +80,56 @@ exports.getProductDetails = catchAsyncError(async(req, res, next) =>{
     }
 
     res.status(200).json({
-
         success: true,
         product
+    });
+});
+
+//Create new product review or Update review
+exports.createProductReview = catchAsyncError(async (req, res, next)=>{
+    
+    const {rating, comment, productId} = req.body;
+
+    const review = {
+        user: req.user.id,
+        name: req.user.name,
+        rating : Number(rating),
+        comment,
+    };
+
+    const product = await Product.findById(productId);
+
+    const isReviewed = product.reviews.find(
+        (rev) => rev.user?.toString() === req.user._id?.toString()
+    );
+
+    // const reviewIndex  = product.reviews.findIndex((rev) => review.user?.toString() === req.user._id.toString());
+
+    if(isReviewed){
+        product.reviews.forEach(rev => {
+            if(rev.user?.toString() === req.user._id?.toString()){
+                rev.rating = rating,
+                rev.comment = comment
+            }
+        });
+    
+    }
+    else{
+        product.reviews.push(review);
+        product.numOfReviews = product.reviews.length;
+    }
+
+    //Calculate overall ratings
+    // const reviewsSum = 0;
+    // product.overallRating = product.reviews.forEach((rev)=>{
+    //     reviewsSum += rev.rating;
+    // });
+
+    product.overallRating = product.reviews.reduce((acc, rev) => acc + rev.rating, 0)/product.reviews.length;
+    
+    await product.save({validateBeforeSave: false});
+
+    res.status(200).json({
+        success: true,  
     });
 });
