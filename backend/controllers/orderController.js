@@ -50,5 +50,19 @@ exports.getMyOrders = catchAsyncError(async(req, res, next)=>{
     res.status(200).json({
         success: true,
         myOrders,
-    })
-})
+    });
+});
+
+//Get all orders --ADMIN
+exports.getAllOrders = catchAsyncError(async (req, res, next)=>{
+    const allOrders = await Order.find();
+
+    if(!allOrders){
+        return next(new ErrorHandler("No orders found!"), 404);
+    }
+
+    res.status(200).json({
+        success: true,
+        allOrders
+    });
+});
