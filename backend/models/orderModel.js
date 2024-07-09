@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 const orderSchema = new mongoose.Schema({
     shippingInfo:{
@@ -75,7 +75,7 @@ const orderSchema = new mongoose.Schema({
         },
         paidAt: {
             type: Date,
-            required: true
+            //required: true
         },
         
     },
