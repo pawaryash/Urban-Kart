@@ -165,6 +165,19 @@ exports.deleteReview = catchAsyncError(async (req, res, next) =>{
     );
 
     product.reviews = reviews;
+
+    product.overallRating = reviews.reduce((acc, rev) => acc + rev.rating, 0)/product.reviews.length;
+
+    product.numOfReviews = reviews.length;
+
+    // await product.findByIdAndUpdate(req.query.productId, {
+    //     reviews, overallRating, numOfReviews
+    // }, {
+    //     new: true,
+    //     runValidators: true,
+    //     useFindAndModify: false
+    // });
+
     await product.save();
 
     res.status(200).json({
