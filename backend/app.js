@@ -17,7 +17,7 @@ const order = require("./routes/orderRoutes");
 
 app.use("/api/v1/", product);
 app.use("/api/v1/users", user);
-app.use("/api/v1", user);
+app.use("/api/v1", user); //Backend User Routes
 app.use("/api/v1/",order);
 
 //Middleware for error handling
